@@ -1,0 +1,4 @@
+let a = "Rishi" # testing comments
+let b = 'Mishra'
+let c = 4
+c == b
