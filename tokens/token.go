@@ -40,4 +40,5 @@ const (
 	COMMENT = "COMMENT"
 	EOF     = "EOF"
 	ILLEGAL = "ILLEGAL"
+	NEWLINE = "NEWLINE"
 )

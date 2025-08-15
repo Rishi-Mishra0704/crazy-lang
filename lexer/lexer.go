@@ -24,16 +24,35 @@ func Lexer(line string) ([]Token, error) {
 	for i < len(runes) {
 		ch := runes[i]
 
-		if unicode.IsSpace(ch) {
+		if unicode.IsSpace(ch) && ch != '\n' {
 			i++
+			continue
+		}
+
+		if ch == '\n' {
+			tokensList = append(tokensList, Token{Type: tokens.NEWLINE, Value: "\n"})
+			i++
+			continue
+		}
+
+		// Handle Windows-style \r\n newlines
+		if ch == '\r' {
+			if i+1 < len(runes) && runes[i+1] == '\n' {
+				tokensList = append(tokensList, Token{Type: tokens.NEWLINE, Value: "\r\n"})
+				i += 2
+			} else {
+				tokensList = append(tokensList, Token{Type: tokens.NEWLINE, Value: "\r"})
+				i++
+			}
 			continue
 		}
 
 		// comments
 		if ch == '#' {
-			tok, _ := readComment(runes, i) // discard newI; rest of line is comment
+			tok, newI := readComment(runes, i)
 			tokensList = append(tokensList, tok)
-			break
+			i = newI
+			continue
 		}
 
 		// multi-char ops

@@ -2,3 +2,12 @@ let a = "Rishi" # testing comments
 let b = 'Mishra'
 let c = 4
 c == b
+fun factorial(n) {
+    if n <= 1 {
+        1
+    } else {
+        n * factorial(n - 1)
+    }
+}
+
+factorial(5)

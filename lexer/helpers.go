@@ -88,7 +88,12 @@ func readNumber(runes []rune, start int) (Token, int) {
 
 // readComment grabs everything from '#' to end of line
 func readComment(runes []rune, start int) (Token, int) {
-	return Token{Type: tokens.COMMENT, Value: string(runes[start:])}, len(runes)
+	i := start
+	for i < len(runes) && runes[i] != '\n' && runes[i] != '\r' {
+		i++
+	}
+	value := string(runes[start:i])
+	return Token{Type: tokens.COMMENT, Value: value}, i
 }
 
 // readMultiCharOperator checks for operators like '==', '!=', '<=', '>='
