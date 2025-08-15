@@ -1,7 +1,6 @@
 package lexer
 
 import (
-	"fmt"
 	"strings"
 	"unicode"
 
@@ -84,8 +83,5 @@ func Lexer(line string) ([]Token, error) {
 
 	}
 
-	for _, t := range tokensList {
-		fmt.Printf("Token(Type=%s, Value=%s)\n", t.Type, t.Value)
-	}
 	return tokensList, nil
 }

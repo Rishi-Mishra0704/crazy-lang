@@ -7,6 +7,8 @@ import (
 )
 
 func Parse(tokens []lexer.Token) error {
-	fmt.Println(tokens[0].Value)
+	for _, t := range tokens {
+		fmt.Printf("Token(Type=%s, Value=%s)\n", t.Type, t.Value)
+	}
 	return nil
 }
